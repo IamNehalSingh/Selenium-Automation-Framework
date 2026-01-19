@@ -1,0 +1,17 @@
+# Maven
+target/
+
+# TestNG
+test-output/
+
+# Logs
+logs/
+*.log
+*.log.gz
+
+# Reports
+reports/
+ExtentReport_*.html
+
+# OS
+.DS_Store

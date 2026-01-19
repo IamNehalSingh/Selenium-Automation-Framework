@@ -1,22 +1,41 @@
-/*pure test scripts
-		 * Login will inharit all the property of the basetest and it will act as the parent class
-		 * need to create the object of the loginPage class use of constructor in the login page and whenever we will create the object of the class
-		it will force the user to pass the webdriver instance as the arguement*/
-
 package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import base.BaseTest;
 import pages.LoginPage;
+import utils.Log;
 
 public class LoginTest extends BaseTest {
 
     @Test
     public void testValidLogin() {
-        LoginPage loginPage = new LoginPage(driver);  
+
+        Log.info("Starting testValidLogin");
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        test.info("Entering username and password");
         loginPage.login("Iamnehalsingh01@gmail.com", "Neh@l321");
-        System.out.println("You have successfully logged in : "+driver.getTitle());
-       // Assert.assertEquals(driver.getTitle(), "Jobseeker's Login");
+
+        test.info("Login submitted");
+        Log.info("Logged in successfully");
+
+        System.out.println("Page Title: " + driver.getTitle());
+    }
+    
+    @Test
+    public void testInvalidLogin() {
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        test.info("Attempting invalid login");
+        loginPage.login("abc@gmail.com", "123");
+
+        Assert.assertTrue(
+            loginPage.isInvalidLoginPopupDisplayed(),
+            "Invalid login popup should be displayed"
+        );
     }
 }
